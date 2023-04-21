@@ -21,7 +21,7 @@ class AirQualityMonitor():
         self.pmtwo = int.from_bytes(b''.join(self.data[2:4]), byteorder='little') / 10
         self.pmten = int.from_bytes(b''.join(self.data[4:6]), byteorder='little') / 10
         self.meas = {
-            "timestamp": datetime.datetime.now(),
+            "timestamp": datetime.datetime.now().strftime("%m-%d %H:%M"),
             "pm2.5": self.pmtwo,
             "pm10": self.pmten,
         }
