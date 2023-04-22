@@ -4,6 +4,7 @@ import time
 import datetime
 import serial
 import redis
+from zoneinfo import ZoneInfo
 
 redis_client = redis.StrictRedis(host=os.environ.get('REDIS_HOST'), port=6379, db=0)
 
@@ -21,7 +22,7 @@ class AirQualityMonitor():
         self.pmtwo = int.from_bytes(b''.join(self.data[2:4]), byteorder='little') / 10
         self.pmten = int.from_bytes(b''.join(self.data[4:6]), byteorder='little') / 10
         self.meas = {
-            "timestamp": datetime.datetime.now().strftime("%m-%d %H:%M"),
+            "timestamp": datetime.datetime.now(ZoneInfo("Europe/Berlin")).strftime("%m-%d %H:%M"),
             "pm2.5": self.pmtwo,
             "pm10": self.pmten,
         }
