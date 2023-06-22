@@ -13,6 +13,14 @@ To run, use the run command:
 make run
 ```
 
+## Restarting
+To restart after making changes:
+```bash
+docker-compose down
+make build
+make run
+```
+
 ## Architecture
 This project uses python, flask, docker-compose and redis to create a simple web server to display the latest historical values from the sensor.
 
