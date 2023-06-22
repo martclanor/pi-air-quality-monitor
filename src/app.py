@@ -24,14 +24,14 @@ def reconfigure_data(measurement):
     return {
         'labels': [x['measurement']['timestamp'] for x in measurement],
         'pm10': {
-            'label': 'pm10',
+            'label': 'pm10 (max: 45)',
             'data': [x['measurement']['pm10'] for x in measurement],
             'backgroundColor': '#cc0000',
             'borderColor': '#cc0000',
             'borderWidth': 3,
         },
         'pm2': {
-            'label': 'pm2.5',
+            'label': 'pm2.5 (max: 15)',
             'data': [x['measurement']['pm2.5'] for x in measurement],
             'backgroundColor': '#42C0FB',
             'borderColor': '#42C0FB',
