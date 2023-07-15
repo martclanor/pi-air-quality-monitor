@@ -14,7 +14,15 @@ class AirQualityMonitor():
     def __init__(self):
         self.ser = serial.Serial('/dev/ttyUSB0')
 
+    def awaken_sensor(self):
+        self.ser.write(bytes.fromhex('AA B4 06 01 00 00 00 00 00 00 00 00 00 00 00 FF FF 05 AB'))
+        time.sleep(10)  # Allow some time for the sensor to wake up
+
+    def sleep_sensor(self):
+        self.ser.write(bytes.fromhex('AA B4 06 01 00 00 00 00 00 00 00 00 00 00 00 FF FF 06 AB'))
+
     def get_measurement(self):
+        self.awaken_sensor()
         self.data = []
         for index in range(0,10):
             datum = self.ser.read()
@@ -26,6 +34,7 @@ class AirQualityMonitor():
             "pm2.5": self.pmtwo,
             "pm10": self.pmten,
         }
+        self.sleep_sensor()  # Put the sensor to sleep after getting the measurement
         return {
             'time': int(time.time()),
             'measurement': self.meas
