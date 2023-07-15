@@ -19,7 +19,7 @@ atexit.register(lambda: scheduler.shutdown())
 
 def reconfigure_data(measurement):
     """Reconfigures data for chart.js"""
-    measurement = measurement[:2016]
+    measurement = measurement[:672]
     measurement.reverse()
     return {
         'labels': [x['measurement']['timestamp'] for x in measurement],
